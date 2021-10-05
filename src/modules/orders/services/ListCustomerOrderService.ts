@@ -14,7 +14,9 @@ class ListCustomerOrdersService {
     const order = await ordersRepository.findByCustomerId(customer_id);
 
     if (!order) {
-      throw new AppError('This user does not have any order.');
+      throw new AppError(
+        'This user does not have any order. Please, try again.',
+      );
     }
 
     return order;
