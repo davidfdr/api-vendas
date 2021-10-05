@@ -1,0 +1,24 @@
+import productsRouter from '@modules/products/routes/products.routes';
+import sessionsRouter from '@modules/users/routes/session.routes';
+import usersRouter from '@modules/users/routes/users.routes';
+import passwordRouter from '@modules/users/routes/password.routes';
+import { Router } from 'express';
+import profileRouter from '@modules/users/routes/profile.routes';
+import customerRouter from '@modules/customers/routes/customer.routes';
+import ordersRouter from '@modules/orders/routes/orders.routes';
+
+const routes = Router();
+
+routes.use('/products', productsRouter);
+routes.use('/users', usersRouter);
+routes.use('/sessions', sessionsRouter);
+routes.use('/password', passwordRouter);
+routes.use('/profile', profileRouter);
+routes.use('/customers', customerRouter);
+routes.use('/orders', ordersRouter);
+
+routes.get('/', (request, response) => {
+  return response.json({ message: 'MIGUEL ELIAS FAULSTICH DINIZ REIS' });
+});
+
+export default routes;
