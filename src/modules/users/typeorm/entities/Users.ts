@@ -7,6 +7,8 @@ import {
   UpdateDateColumn,
   VersionColumn,
 } from 'typeorm';
+import { Exclude, Expose } from 'class-transformer';
+
 import UserToken from './UserToken';
 
 @Entity('users')
@@ -21,6 +23,7 @@ class User {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @Column()
@@ -37,6 +40,15 @@ class User {
 
   @VersionColumn()
   version: number;
+
+  @Expose({ name: 'avatar_url' })
+  getAvatarUrl(): string | null {
+    if (!this.avatar) {
+      return null;
+    } else {
+      return `${process.env.APP_WEB_URL}/files/${this.avatar}`;
+    }
+  }
 }
 
 export default User;
