@@ -15,7 +15,9 @@ export default function isAuthenticated(
     // Bearer token
     const tokenJWT = authHeader.split(' ');
     const token = tokenJWT[1];
-
+    if (!authConfig.jwt.secret) {
+      throw new Error('JWT not configured.');
+    }
     verify(token, authConfig.jwt.secret, (err, decoded) => {
       if (err) {
         throw new AppError(err.name + '-' + err.message, 400, err.stack);
